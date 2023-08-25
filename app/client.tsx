@@ -2,6 +2,7 @@
 
 import ItemCard from '@/components/item-card'
 import ProjectDialog from '@/components/project-dialog'
+import ThemeToggle from '@/components/theme-toggle'
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 import { useRouter } from 'next/navigation'
@@ -24,8 +25,9 @@ export default function HomeClient({ data }: Props) {
   const [openDialog, setOpenDialog] = useState(false);
 
   return (
-    <>
-      <Card className="w-[750px] min-w-fit h-fit">
+    <div>
+      <ThemeToggle />
+      <Card className="w-[750px] min-w-fit h-fit mt-4">
         <CardHeader className="flex flex-row justify-between">
           <div className="space-y-1.5">
             <CardTitle>Projetos</CardTitle>
@@ -48,6 +50,6 @@ export default function HomeClient({ data }: Props) {
         </CardContent>
       </Card>
       <ProjectDialog open={openDialog} onClose={() => setOpenDialog(false)} />
-    </>
+    </div>
   )
 }

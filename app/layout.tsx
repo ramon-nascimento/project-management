@@ -2,6 +2,7 @@ import ToastProvider from '@/providers/toast-provider'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
+import { ThemeProvider } from '@/providers/theme-provider'
 
 const font = Poppins({ subsets: ['latin'], weight: ['400','600','800'] })
 
@@ -17,10 +18,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-br">
-      <body className={`${font.className} flex py-5 justify-center`}>
-        <ToastProvider />
-        {children}
-      </body>
+      <ThemeProvider
+        attribute='class'
+        defaultTheme='system'
+        enableSystem
+      >
+        <body className={`${font.className} flex py-5 justify-center`}>
+          <ToastProvider />
+          {children}
+        </body>
+      </ThemeProvider>
     </html>
   )
 }
