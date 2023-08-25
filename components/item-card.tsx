@@ -34,7 +34,7 @@ export default function ItemCard({ id, title, description, onClick }: Props) {
   const completedTasks = tasks?.filter(data => data.status === 'concluido');
   const percentage = isNaN((completedTasks?.length/tasks?.length) * 100) 
     ? '0' 
-    : (completedTasks?.length/tasks?.length) * 100;
+    : ((completedTasks?.length/tasks?.length) * 100).toFixed();
   const badgeText = tasks?.length === 0
     ? 'nao-iniciado'
     : tasks?.length === completedTasks?.length
