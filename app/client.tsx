@@ -5,6 +5,7 @@ import ProjectDialog from '@/components/project-dialog'
 import ThemeToggle from '@/components/theme-toggle'
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
+import { PlusIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react';
 
@@ -27,14 +28,18 @@ export default function HomeClient({ data }: Props) {
   return (
     <div>
       <ThemeToggle />
-      <Card className="w-[750px] min-w-fit h-fit mt-4">
+      <Card className="md:w-[750px] min-w-fit h-fit mt-4">
         <CardHeader className="flex flex-row justify-between">
           <div className="space-y-1.5">
             <CardTitle>Projetos</CardTitle>
             <CardDescription>Confira abaixo todos os seus projetos.</CardDescription>
           </div>
-          <Button onClick={() => setOpenDialog(true)}>
-            Adicionar Projeto
+          <Button
+            onClick={() => setOpenDialog(true)} 
+            className='max-sm:rounded-full max-sm:w-10 max-sm:h-10 max-sm:p-0'
+          >
+            <PlusIcon className='block sm:hidden' size={16} />
+            <span className='max-sm:hidden'>Adicionar Projeto</span>
           </Button>
         </CardHeader>
         <CardContent>

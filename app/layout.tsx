@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-br">      
-      <body className={`${font.className} flex py-5 justify-center`}>
+      <body className={`${font.className} flex py-5 max-sm:px-4 justify-center`}>
         <ThemeProvider
           attribute='class'
           defaultTheme='system'

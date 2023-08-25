@@ -41,14 +41,14 @@ export default function ItemCard({ title, description, onClick, data }: Props) {
       onClick={onClick}
     >
       <CardHeader>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 max-sm:flex-col max-sm:items-start">
           <Badge className={"self-start " + badgeColor}>{badgeText}</Badge>
           <span className="text-sm text-zinc-400">
             {`${percentage}%`} completo {' '}
             {`(${completedTasks.length}/${data.length} tasks)`}         
           </span>
         </div>
-        <CardTitle className="text-lg">{title}</CardTitle>
+        <CardTitle className="text-lg max-sm:pt-2">{title}</CardTitle>
         <CardDescription>{description}</CardDescription>        
       </CardHeader>
     </Card>
