@@ -18,12 +18,17 @@ interface Props {
 
 export default function ItemCard({ title, description, onClick, data }: Props) {
   const completedTasks = data.filter(data => data.status === 'concluido');
-  const percentage = (completedTasks.length/data.length) * 100
-  const badgeText = completedTasks.length === data.length 
-    ? 'concluido' 
-    : completedTasks.length > 0
-      ? 'em-progresso'
-      : 'nao-iniciado'
+  const percentage = isNaN((completedTasks.length/data.length) * 100) 
+    ? '0' 
+    : (completedTasks.length/data.length) * 100;
+  const badgeText = data.length === 0
+    ? 'nao-iniciado'
+    : data.length === completedTasks.length
+      ? 'concluido' 
+      : completedTasks.length > 0
+        ? 'em-progresso'
+        : 'nao-iniciado'   
+    
   const badgeColor = badgeText === 'concluido'
     ? 'bg-emerald-500'
     : badgeText === 'em-progresso'
@@ -39,7 +44,7 @@ export default function ItemCard({ title, description, onClick, data }: Props) {
         <div className="flex items-center gap-2">
           <Badge className={"self-start " + badgeColor}>{badgeText}</Badge>
           <span className="text-sm text-zinc-400">
-            {`${percentage.toFixed()}%`} completo {' '}
+            {`${percentage}%`} completo {' '}
             {`(${completedTasks.length}/${data.length} tasks)`}         
           </span>
         </div>
