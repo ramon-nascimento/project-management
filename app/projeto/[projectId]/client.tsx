@@ -15,6 +15,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { z } from 'zod';
 import TaskCard from './task/[taskId]/components/task-card';
+import ThemeToggle from '@/components/theme-toggle';
 
 const formSchema = z.object({
   title: z.string().nonempty("Nome da task é obrigatório.")
@@ -81,7 +82,10 @@ export default function ProjectClient({ data }: Props) {
 
   return (
     <div className='flex flex-col gap-4 w-[750px]'>
-      <ReturnButton page='/' />
+      <div className='flex justify-between'>
+        <ReturnButton page='/' />
+        <ThemeToggle />
+      </div>
       <Card className="w-full">
         <CardHeader>
           <CardTitle>{project?.title}</CardTitle>

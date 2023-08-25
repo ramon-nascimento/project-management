@@ -17,17 +17,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt-br">
-      <ThemeProvider
-        attribute='class'
-        defaultTheme='system'
-        enableSystem
-      >
-        <body className={`${font.className} flex py-5 justify-center`}>
+    <html lang="pt-br">      
+      <body className={`${font.className} flex py-5 justify-center`}>
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='system'
+          enableSystem
+        >
           <ToastProvider />
           {children}
-        </body>
-      </ThemeProvider>
+        </ThemeProvider>
+      </body>
     </html>
   )
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import ReturnButton from "@/components/return-button";
+import ThemeToggle from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -69,7 +70,11 @@ export default function TaskClient({ data }: Props) {
 
   return (
     <div className='flex flex-col gap-4 w-[750px]'>
-      <ReturnButton page={'/projeto/' + data?.projectId} />
+      <div className='flex justify-between'>
+        <ReturnButton page={'/projeto/' + data?.projectId} />
+        <ThemeToggle />
+      </div>
+      
       <Card className="w-full">
         <CardHeader>
           <CardTitle>{data?.title}</CardTitle>
