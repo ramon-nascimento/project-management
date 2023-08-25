@@ -24,6 +24,7 @@ interface Props {
 export default function HomeClient({ data }: Props) {
   const router = useRouter();
   const [openDialog, setOpenDialog] = useState(false);
+  console.log(data)
 
   return (
     <div>
