@@ -7,25 +7,39 @@ import {
   CardTitle
 } from "./ui/card";
 import { Badge } from "./ui/badge";
+import { useEffect, useState } from "react";
 import { Task } from "@prisma/client";
+import axios from "axios";
 
 interface Props {
+  id: string;
   title: string;
   description: string | null;
   onClick: () => void;
-  data: Task[];
 }
 
-export default function ItemCard({ title, description, onClick, data }: Props) {
-  const completedTasks = data.filter(data => data.status === 'concluido');
-  const percentage = isNaN((completedTasks.length/data.length) * 100) 
+export default function ItemCard({ id, title, description, onClick }: Props) {
+  const [tasks, setTasks] = useState<Task[]>([]);
+
+  useEffect(() => {
+    fetchTasks();
+  }, [tasks, setTasks])
+
+  async function fetchTasks() {
+    const { data } = await axios.get('/api/project/' + id);
+
+    setTasks(data.tasks)
+  }
+
+  const completedTasks = tasks?.filter(data => data.status === 'concluido');
+  const percentage = isNaN((completedTasks?.length/tasks?.length) * 100) 
     ? '0' 
-    : (completedTasks.length/data.length) * 100;
-  const badgeText = data.length === 0
+    : (completedTasks?.length/tasks?.length) * 100;
+  const badgeText = tasks?.length === 0
     ? 'nao-iniciado'
-    : data.length === completedTasks.length
+    : tasks?.length === completedTasks?.length
       ? 'concluido' 
-      : completedTasks.length > 0
+      : completedTasks?.length > 0
         ? 'em-progresso'
         : 'nao-iniciado'   
     
@@ -45,7 +59,7 @@ export default function ItemCard({ title, description, onClick, data }: Props) {
           <Badge className={"self-start " + badgeColor}>{badgeText}</Badge>
           <span className="text-sm text-zinc-400">
             {`${percentage}%`} completo {' '}
-            {`(${completedTasks.length}/${data.length} tasks)`}         
+            {`(${completedTasks?.length}/${tasks?.length} tasks)`}         
           </span>
         </div>
         <CardTitle className="text-lg max-sm:pt-2">{title}</CardTitle>

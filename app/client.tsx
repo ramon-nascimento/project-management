@@ -5,26 +5,18 @@ import ProjectDialog from '@/components/project-dialog'
 import ThemeToggle from '@/components/theme-toggle'
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
+import { Project } from '@prisma/client'
 import { PlusIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react';
 
 interface Props {
-  data: ({ 
-    Task: { 
-      id: string;
-      title: string; 
-      description: string | null; 
-      status: string | null; 
-      projectId: string; 
-    }[]; 
-  } & { id: string; title: string; description: string; })[]
+  data: Project[];
 }
 
 export default function HomeClient({ data }: Props) {
   const router = useRouter();
   const [openDialog, setOpenDialog] = useState(false);
-  console.log(data)
 
   return (
     <div>
@@ -43,14 +35,14 @@ export default function HomeClient({ data }: Props) {
             <span className='max-sm:hidden'>Adicionar Projeto</span>
           </Button>
         </CardHeader>
-        <CardContent>
-          {data.map(({ id, title, description, Task }) => (
+        <CardContent className='space-y-4'>
+          {data.map(({ id, title, description }) => (
             <ItemCard 
+              id={id}
               key={id}
               title={title} 
               description={description} 
               onClick={() => router.push('/projeto/' + id)}
-              data={Task}
             />
           ))}
         </CardContent>
