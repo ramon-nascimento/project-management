@@ -24,7 +24,7 @@ export default function TaskCard({ title, description, onEdit, onDelete, badge, 
   return (
     <Card>
       <CardHeader className="grid grid-cols-10 justify-between">
-        <div className="space-y-1.5 col-span-7">
+        <div className="space-y-1.5 col-span-7 max-sm:col-span-12">
           <Badge className={'self-start ' + badgeColor}>
             {badge}
           </Badge>
@@ -33,11 +33,21 @@ export default function TaskCard({ title, description, onEdit, onDelete, badge, 
             {description}
           </CardDescription>
         </div>
-        <div className="space-x-2 col-span-3">
-          <Button onClick={onEdit} variant='secondary' disabled={disabled}>
+        <div className="space-x-2 col-span-3 max-sm:col-span-12 max-sm:pt-4 max-sm:flex max-sm:gap-1 max-sm:space-x-0">
+          <Button 
+            className="max-sm:w-1/2" 
+            onClick={onEdit} 
+            variant='secondary' 
+            disabled={disabled}
+          >
             Abrir
           </Button>
-          <Button onClick={onDelete} variant='destructive' disabled={disabled}>
+          <Button 
+            className="max-sm:w-1/2" 
+            onClick={onDelete} 
+            variant='destructive' 
+            disabled={disabled}
+          >
             Deletar
           </Button>        
         </div>

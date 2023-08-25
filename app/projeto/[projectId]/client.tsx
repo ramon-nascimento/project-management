@@ -101,7 +101,7 @@ export default function ProjectClient({ data }: Props) {
                 control={form.control} 
                 name='title'
                 render={({ field }) => (
-                  <FormItem className='col-span-10'>
+                  <FormItem className='col-span-10 max-sm:col-span-12'>
                     <FormControl>
                       <Input 
                         disabled={loading}
@@ -115,7 +115,7 @@ export default function ProjectClient({ data }: Props) {
                 )}
               />
               <Button 
-                className='col-span-2 w-[102px]'
+                className='col-span-2 w-[102px] max-sm:w-full max-sm:col-span-12'
                 disabled={loading}
                 type='submit'
               >
