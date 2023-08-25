@@ -44,6 +44,7 @@ export default function ProjectForm({ onClick }: Props) {
       
       router.push('/');
       router.refresh();
+      if (onClick) onClick();
     } catch (error: any) {
       toast.error(error.message);
       console.log("[CREATE_PROJECT]: ", error);

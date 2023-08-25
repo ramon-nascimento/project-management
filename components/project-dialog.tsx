@@ -1,6 +1,5 @@
 import ProjectForm from "./project-form";
-import { Button } from "./ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "./ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 
 interface Props {
   open: boolean;
