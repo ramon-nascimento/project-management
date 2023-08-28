@@ -8,6 +8,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { UserButton } from "@clerk/nextjs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Task } from "@prisma/client"
 import axios from "axios";
@@ -72,7 +73,10 @@ export default function TaskClient({ data }: Props) {
     <div className='flex flex-col gap-4 w-[750px]'>
       <div className='flex justify-between'>
         <ReturnButton page={'/projeto/' + data?.projectId} />
-        <ThemeToggle />
+        <div className='flex gap-4 items-center'>
+          <ThemeToggle />
+          <UserButton afterSignOutUrl='/' />
+        </div>
       </div>
       
       <Card className="w-full">

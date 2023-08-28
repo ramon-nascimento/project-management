@@ -26,3 +26,33 @@ export async function GET(
 
   return NextResponse.json(response);
 }
+
+export async function DELETE(
+  req: Request,
+  { params }: { params: { projectId: string } }
+) {
+  if (!params.projectId) return new NextResponse("ID da task é obrigatório.", { status: 401 });
+
+  try {    
+    const project = await prismadb.project.findFirst({
+      where: {
+        id: params.projectId
+      }
+    })
+  
+    if (!project) return new NextResponse("Projeto não foi encontrado.", { status: 404 });
+  
+    await prismadb.project.delete({
+      where: {
+        id: project.id
+      }
+    })
+
+    return NextResponse.json({
+      message: "Projeto removido com sucesso."
+    });
+  } catch (error) {
+    console.log("[DELETE_PROJECT]: ", error);
+    return new NextResponse("Ocorreu um erro ao remover o projeto.", { status: 500 });
+  }
+}

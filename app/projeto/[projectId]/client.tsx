@@ -16,6 +16,7 @@ import { toast } from 'react-hot-toast';
 import { z } from 'zod';
 import TaskCard from './task/[taskId]/components/task-card';
 import ThemeToggle from '@/components/theme-toggle';
+import { UserButton } from '@clerk/nextjs';
 
 const formSchema = z.object({
   title: z.string().nonempty("Nome da task é obrigatório.")
@@ -83,8 +84,11 @@ export default function ProjectClient({ data }: Props) {
   return (
     <div className='flex flex-col gap-4 w-[750px]'>
       <div className='flex justify-between'>
-        <ReturnButton page='/' />
-        <ThemeToggle />
+        <ReturnButton page='/' /> 
+        <div className='flex gap-4 items-center'>
+          <ThemeToggle />
+          <UserButton afterSignOutUrl='/' />
+        </div>
       </div>
       <Card className="w-full">
         <CardHeader>

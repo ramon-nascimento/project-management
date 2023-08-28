@@ -5,6 +5,7 @@ import ProjectDialog from '@/components/project-dialog'
 import ThemeToggle from '@/components/theme-toggle'
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
+import { UserButton } from '@clerk/nextjs'
 import { Project } from '@prisma/client'
 import { PlusIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
@@ -20,7 +21,10 @@ export default function HomeClient({ data }: Props) {
 
   return (
     <div>
-      <ThemeToggle />
+      <div className='flex items-center justify-between'>
+        <ThemeToggle />
+        <UserButton afterSignOutUrl='/' />
+      </div>
       <Card className="md:w-[750px] min-w-fit h-fit mt-4">
         <CardHeader className="flex flex-row justify-between">
           <div className="space-y-1.5">
