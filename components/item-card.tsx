@@ -10,6 +10,9 @@ import { Badge } from "./ui/badge";
 import { useEffect, useState } from "react";
 import { Task } from "@prisma/client";
 import axios from "axios";
+import { Button } from "./ui/button";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 interface Props {
   id: string;
@@ -19,6 +22,7 @@ interface Props {
 }
 
 export default function ItemCard({ id, title, description, onClick }: Props) {
+  const router = useRouter();
   const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
@@ -29,6 +33,12 @@ export default function ItemCard({ id, title, description, onClick }: Props) {
     const { data } = await axios.get('/api/project/' + id);
 
     setTasks(data.tasks)
+  }
+
+  async function onDeleteHandle() {
+    const { data } = await axios.delete('/api/project/' + id);
+    router.refresh();
+    toast.success(data.message)
   }
 
   const completedTasks = tasks?.filter(data => data.status === 'concluido');
@@ -55,13 +65,23 @@ export default function ItemCard({ id, title, description, onClick }: Props) {
       onClick={onClick}
     >
       <CardHeader>
-        <div className="flex items-center gap-2 max-sm:flex-col max-sm:items-start">
-          <Badge className={"self-start " + badgeColor}>{badgeText}</Badge>
-          <span className="text-sm text-zinc-400">
-            {`${percentage}%`} completo {' '}
-            {`(${completedTasks?.length}/${tasks?.length} tasks)`}         
-          </span>
-        </div>
+        <div className="flex items-center justify-between max-sm:flex-col max-sm:items-start">
+          <div className="flex gap-2 max-sm:flex-col">
+            <Badge className={"self-start " + badgeColor}>{badgeText}</Badge>
+            <span className="text-sm text-zinc-400">
+              {`${percentage}%`} completo {' '}
+              {`(${completedTasks?.length}/${tasks?.length} tasks)`}
+            </span>
+          </div>
+          <Button 
+            variant='destructive'
+            size='sm'
+            onClick={onDeleteHandle}
+            className="max-sm:mt-2"
+          >
+            Deletar
+          </Button>                 
+        </div>        
         <CardTitle className="text-lg max-sm:pt-2">{title}</CardTitle>
         <CardDescription>{description}</CardDescription>        
       </CardHeader>
